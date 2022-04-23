@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block common_html  %}
+        
+
+   
+                    <!-- <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                                Dropdown
+                                            </a>
+                                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                                <li>
+                                                    <hr class="dropdown-divider">
+                                                </li>
+                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                            </ul>
+                                        </li> -->
+                    <!-- <li class="nav-item">
+                        <a class="nav-link disabled">Disabled</a>
+                    </li> -->
+                
+           
+
+    <div class="container">
+        <form action="/homepage" method="post">
+            <h2>Add a ToDo</h2>
+            <div class="mb-3">
+                <label for="tittle"class="form-label">ToDO Tittle</label>
+                <input type="text"  name="tittle"  class="form-control" id="tittle" >
+               
+            </div>
+            <div class="mb-3">
+                <label for="desc" class="form-label">ToDo Description</label>
+                <input type="text"  name="desc" class="form-control" id="desc">
+            </div>
+             
+            <button type="submit" class="btn btn-dark">Submit</button>
+        </form>
+
+    </div>
+<h3>Your Todos</h3>
+    <div class="container my-4">
+        
+
+            {% if allTodo|length==0 %}
+                <!-- no record -->
+                <div class="alert alert-dark" role="alert">
+                   No Todos found. Add a Todo!
+                  </div>
+            {% else %}
+
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">SNo:</th>
+                    <th scope="col">Tittle</th>
+                    <th scope="col">Desc</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for todo in allTodo %}
+            
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{todo.tittle}}</td>
+                <td>{{todo.desc}}</td>
+                <td>{{todo.date_created}}</td>
+                <td> <button onclick="location.href='/edit/{{todo.sno}}'";  type="button" class="btn btn-outline-dark mx-1">EDIT</button></td>
+                <td> <button onclick="location.href='delete/{{todo.sno}}'";  type="button" class="btn btn-outline-dark mx-">DELETE</button></td>
+            </tr>
+           
+                {% endfor %}
+              
+
+                    
+            {% endif %}
+
+            
+            </tbody>
+          </table>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    -->
+
+    {% endblock common_html %}
